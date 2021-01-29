@@ -253,20 +253,75 @@ def delete_manager():
         'success': True
     })
 
+
+# Participant
+
 # endpoint POST /participant
 # Role: Participant
 @app.route('/participant', methods=['POST'])
-@requires_auth('post:participant')
-def add_participant(jwt):
+#@requires_auth('post:participant')
+#def add_participant(jwt):
+def add_participant():
+    try:
+        name = request.json.get('name')
+        phone = request.json.get('phone')
+        
+    except Exception:
+        print("in except", file = sys.stderr)
+        abort(400, "add participant request has missing parameters")
+        
+    if not name:
+        print("in if", file = sys.stderr)
+        abort(422, "add participant request has missing parameters")
+        
+    try:
+        new_participant = new_participant(name=name, phone=phone)
+        new_participant.insert()
+        print("NEW PARTICIPANT ID", file = sys.stderr)
+        print(new_participant.id, file = sys.stderr)
+        
+    except Exception:
+        #db.session.rollback()
+        abort(500, "add participant request has missing parameters")
+
     return jsonify({
         'success':True
     })
 
 # endpoint DELETE /events/<id>/<id>
 # Role: Participant
-@app.route('/events/<int:event_id>/<int:participant_id>', methods=['DELETE'])
-@requires_auth('delete:participant')
-def delete_participant(jwt, event_id, participant_id):
+@app.route('/participant', methods=['DELETE'])
+#@requires_auth('delete:participant')
+#def delete_participant(jwt, event_id, participant_id):
+def delete_participant():
+    try:
+        participant_id = request.json.get('id')
+        
+    except Exception:
+        print("in except", file = sys.stderr)
+        abort(400, "delete participant request has missing parameters")
+        
+    if not participant_id:
+        print("in if", file = sys.stderr)
+        abort(422, "delete participant request has missing parameters")
+
+    try:
+        participant = Participant.query.get(participant_id)
+
+    except Exception:
+        print("in except", file = sys.stderr)
+        abort(422, "delete participant request has missing parameters")
+
+    if not participant:
+        abort(404, "delete participant request has missing parameters")
+
+    try:
+        participant.delete()
+
+    except Exception:
+        #db.session.rollback()
+        abort(500, "delete participant request has missing parameters")
+
     return jsonify({
         'success': True
     })
