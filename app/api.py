@@ -30,16 +30,26 @@ def after_request(response):
 # public endpoint
 @app.route('/events', methods=['GET'])
 def get_events():
+@app.route('/', methods=['GET'])
+def index():
     return jsonify({
         'success':True
     })
 
-# endpoint GET /event-details
+# endpoint GET /events
 # public endpoint
-@app.route('/event-details', methods=['GET'])
-def get_event_details():
+# TODO: paging
+@app.route('/event', methods=['GET'])
+def get_events():
+    try:
+        events = Event.query.order_by(Event.id).all()
+        
+    except Exception:
+        abort(500)
+         
     return jsonify({
-        'success':True
+        'success':True,
+        'events': [event.format() for event in events]
     })
 
 # endpoint POST /event
@@ -76,7 +86,8 @@ def add_event():
         abort(500, "add event request has missing parameters")
 
     return jsonify({
-        'success':True
+        'success':True,
+        'event': new_event.format()
     })
 
 # endpoint DELETE /event
@@ -114,7 +125,8 @@ def delete_event():
         abort(500, "delete event request has missing parameters")
 
     return jsonify({
-        'success': True
+        'success': True,
+        'deleted': event.format()
     })
 
 # endpoint PATCH /events/<id>
@@ -175,7 +187,8 @@ def update_event():
         abort(500, "update event request has missing parameters")
         
     return jsonify({
-        'success': True
+        'success': True,
+        'event': event.format()
     })
 
 
