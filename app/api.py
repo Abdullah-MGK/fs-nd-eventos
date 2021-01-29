@@ -288,6 +288,21 @@ def delete_manager():
 
 # Participant
 
+# endpoint GET /managers
+# Role: Admin
+@app.route('/participant', methods=['GET'])
+def get_participants():
+    try:
+        participants = Participant.query.order_by(Participant.id).all()
+        
+    except Exception:
+        abort(500)
+
+    return jsonify({
+        'success':True,
+        'participants': [participant.format() for participant in participants]
+    })
+
 # endpoint POST /participant
 # Role: Participant
 @app.route('/participant', methods=['POST'])
@@ -307,7 +322,7 @@ def add_participant():
         abort(422, "add participant request has missing parameters")
         
     try:
-        new_participant = new_participant(name=name, phone=phone)
+        new_participant = Participant(name=name, phone=phone)
         new_participant.insert()
         print("NEW PARTICIPANT ID", file = sys.stderr)
         print(new_participant.id, file = sys.stderr)
@@ -317,7 +332,8 @@ def add_participant():
         abort(500, "add participant request has missing parameters")
 
     return jsonify({
-        'success':True
+        'success':True,
+        'participant': new_participant.format()
     })
 
 # endpoint DELETE /events/<id>/<id>
@@ -355,7 +371,8 @@ def delete_participant():
         abort(500, "delete participant request has missing parameters")
 
     return jsonify({
-        'success': True
+        'success': True,
+        'deleted': participant.format()
     })
 
 
