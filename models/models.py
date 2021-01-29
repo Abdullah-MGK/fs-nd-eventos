@@ -6,14 +6,11 @@ import json
 
 '''
 from decouple import config
-#database_name = "test"
-#postgresql://{user_name}:{password}@{host_name:host_port}/{database_name}"
-#database_path = "postgresql://{}:{}@{}/{}".format('postgres', 'root', 'localhost:5432', database_name)
-database_path = os.environ['DATABASE_URL']
 '''
 
 database_name = "eventos"
-database_path = "postgresql://{}/{}".format('localhost:5432', database_name)
+#database_path = "postgresql://{}/{}".format('localhost:5432', database_name)
+database_path = os.environ['DATABASE_URL']
 db = SQLAlchemy()
 
 # binds a flask application and a SQLAlchemy service
