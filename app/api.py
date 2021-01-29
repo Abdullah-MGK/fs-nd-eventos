@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, abort
 #from flask_sqlalchemy import SQLAlchemy
 #from sqlalchemy import exc
 from flask_cors import CORS
+from auth.auth import AuthError, requires_auth
 
 
 app = Flask(__name__)
@@ -39,6 +40,7 @@ def get_event_details():
 # endpoint POST /event
 # Role: Admin, Manager
 @app.route('/event', methods=['POST'])
+@requires_auth('post:event')
 def add_event(jwt):
     return jsonify({
         'success':True
@@ -47,7 +49,8 @@ def add_event(jwt):
 # endpoint DELETE /events/<id>
 # Role: Admin, Manager
 @app.route('/events/<int:event_id>', methods=['DELETE'])
-def delete_drink(jwt, event_id):
+@requires_auth('delete:event')
+def delete_event(jwt, event_id):
     return jsonify({
         'success': True
     })
@@ -55,7 +58,8 @@ def delete_drink(jwt, event_id):
 # endpoint PATCH /events/<id>
 # Role: Admin, Manager
 @app.route('/events/<int:event_id>', methods=['PATCH'])
-def update_drink(jwt, event_id):
+@requires_auth('patch:event')
+def update_event(jwt, event_id):
     return jsonify({
         'success': True
     })
@@ -63,6 +67,7 @@ def update_drink(jwt, event_id):
 # endpoint POST /participant
 # Role: Participant
 @app.route('/participant', methods=['POST'])
+@requires_auth('post:participant')
 def add_participant(jwt):
     return jsonify({
         'success':True
@@ -71,6 +76,7 @@ def add_participant(jwt):
 # endpoint DELETE /events/<id>/<id>
 # Role: Participant
 @app.route('/events/<int:event_id>/<int:participant_id>', methods=['DELETE'])
+@requires_auth('delete:participant')
 def delete_participant(jwt, event_id, participant_id):
     return jsonify({
         'success': True
