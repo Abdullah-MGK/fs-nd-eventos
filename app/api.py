@@ -13,7 +13,7 @@ from models.models import Event, Manager, Participant, EventAttendance
 app = Flask(__name__)
 CORS(app)
 setup_db(app)
-db_drop_and_create_all()
+#db_drop_and_create_all()
 
 @app.after_request
 def after_request(response):
