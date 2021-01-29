@@ -92,7 +92,7 @@ def bad_request(error):
     return jsonify({
         "success": False, 
         "error": 400,
-        "message": "Bad Request"
+        "message": str(error)
     }), 400
 
 @app.errorhandler(404)
@@ -100,7 +100,7 @@ def not_found(error):
     return jsonify({
         "success": False, 
         "error": 404,
-        "message": "Not Found"
+        "message": str(error)
     }), 404
 
 @app.errorhandler(422)
@@ -108,7 +108,7 @@ def unprocessable_request(error):
     return jsonify({
         "success": False, 
         "error": 422,
-        "message": "Unprocessable Request"
+        "message": str(error)
     }), 422
 
 @app.errorhandler(500)
@@ -116,7 +116,7 @@ def internal_server_error(error):
     return jsonify({
         "success": False, 
         "error": 500,
-        "message": "Internal Server Error"
+        "message": str(error)
     }), 500
 
 #error handler for AuthError
