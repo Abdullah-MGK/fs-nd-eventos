@@ -28,8 +28,6 @@ def after_request(response):
 
 # endpoint GET /events
 # public endpoint
-@app.route('/events', methods=['GET'])
-def get_events():
 @app.route('/', methods=['GET'])
 def index():
     return jsonify({
