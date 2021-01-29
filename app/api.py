@@ -194,6 +194,21 @@ def update_event():
 
 # Manager
 
+# endpoint GET /managers
+# Role: Admin
+@app.route('/manager', methods=['GET'])
+def get_managers():
+    try:
+        managers = Manager.query.order_by(Manager.id).all()
+        
+    except Exception:
+        abort(500)
+         
+    return jsonify({
+        'success':True,
+        'managers': [manager.format() for manager in managers]
+    })
+
 # endpoint POST /manager
 # Role: Admin
 @app.route('/manager', methods=['POST'])
@@ -225,7 +240,8 @@ def add_manager():
         abort(500, "add manager request has missing parameters")
 
     return jsonify({
-        'success':True
+        'success':True,
+        'manager': new_manager.format()
     })
 
 # endpoint DELETE /manager
@@ -241,9 +257,11 @@ def delete_manager():
         print("in except", file = sys.stderr)
         abort(400, "delete manager request has missing parameters")
         
-    if not event_id:
+    if not manager_id:
         print("in if", file = sys.stderr)
         abort(422, "delete manager request has missing parameters")
+
+    print("manager id", file = sys.stderr)
 
     try:
         manager = Manager.query.get(manager_id)
@@ -263,7 +281,8 @@ def delete_manager():
         abort(500, "delete manager request has missing parameters")
 
     return jsonify({
-        'success': True
+        'success': True,
+        'deleted': manager.format()
     })
 
 
