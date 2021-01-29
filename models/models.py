@@ -1,9 +1,10 @@
 import os
 from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
+#from sqlalchemy import exc
 import json
 
-database_name = "evetos"
+database_name = "eventos"
 database_path = "postgresql://{}/{}".format('localhost:5432', database_name)
 db = SQLAlchemy()
 
@@ -32,8 +33,8 @@ class Event(db.Model):
   city = db.Column(db.String(120))
   date = db.Column(db.DateTime)
   image_link = db.Column(db.String(500))
-  manager_id = db.Column(db.Integer, db.ForeignKey('Manager.id', ondelete="CASCADE"), nullable=False)
-  event_attendance = db.relationship('event_attendance', backref='event', lazy=True, cascade="all, delete-orphan")
+  manager_id = db.Column(db.Integer, db.ForeignKey('managers.id', ondelete="CASCADE"), nullable=False)
+  event_attendance = db.relationship('EventAttendance', backref='event', lazy=True, cascade="all, delete-orphan")
   
   def __repr__(self):
     return json.dumps(self.format())
@@ -43,10 +44,10 @@ class Event(db.Model):
       'id': self.id,
       'name': self.name,
       'genre':  self.genre,
-      'province': = self.province,
-      'city': = self.city,
-      'date': = self.date,
-      'image_link': = self.image_link
+      'province': self.province,
+      'city': self.city,
+      'date': self.date,
+      'image_link': self.image_link
     }
   
   def insert(self):
@@ -85,8 +86,8 @@ class Manager(db.Model):
     }
   
   def insert(self):
-  db.session.add(self)
-  db.session.commit()
+    db.session.add(self)
+    db.session.commit()
 
   def delete(self):
     db.session.delete(self)
@@ -103,7 +104,7 @@ class Participant(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String)
   phone = db.Column(db.String(120))
-  event_attendance = db.relationship('event_attendance', backref='participant', lazy=True, cascade="all, delete-orphan")
+  event_attendance = db.relationship('EventAttendance', backref='participant', lazy=True, cascade="all, delete-orphan")
   
   def __repr__(self):
     return json.dumps(self.format())
@@ -132,8 +133,8 @@ class EventAttendance(db.Model):
   
   id = db.Column(db.Integer, primary_key=True)
   checked_in = db.Column(db.Boolean, default=False)
-  event_id = db.Column(db.Integer, db.ForeignKey('Event.id', ondelete="CASCADE"), nullable=False)
-  participant_id = db.Column(db.Integer, db.ForeignKey('Participant.id', ondelete="CASCADE"), nullable=False)
+  event_id = db.Column(db.Integer, db.ForeignKey('events.id', ondelete="CASCADE"), nullable=False)
+  participant_id = db.Column(db.Integer, db.ForeignKey('participants.id', ondelete="CASCADE"), nullable=False)
   
   def __repr__(self):
     return json.dumps(self.format())
