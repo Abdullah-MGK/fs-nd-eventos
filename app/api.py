@@ -45,7 +45,7 @@ def get_events():
         events = Event.query.order_by(Event.id).all()
         
     except Exception:
-        abort(500)
+        abort(500, "get event request has missing parameters")
          
     return jsonify({
         'success':True,
@@ -202,7 +202,7 @@ def get_managers():
         managers = Manager.query.order_by(Manager.id).all()
         
     except Exception:
-        abort(500)
+        abort(500, "get managers request has missing parameters")
          
     return jsonify({
         'success':True,
@@ -296,7 +296,7 @@ def get_participants():
         participants = Participant.query.order_by(Participant.id).all()
         
     except Exception:
-        abort(500)
+        abort(500, "get participants request has missing parameters")
 
     return jsonify({
         'success':True,
