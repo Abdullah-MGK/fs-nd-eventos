@@ -6,11 +6,13 @@ from flask import Flask, request, jsonify, abort
 #from sqlalchemy import exc
 from flask_cors import CORS
 from auth.auth import AuthError, requires_auth
+from models.models import setup_db, db_drop_and_create_all
 
 
 app = Flask(__name__)
 CORS(app)
-
+setup_db(app)
+db_drop_and_create_all()
 
 @app.after_request
 def after_request(response):
