@@ -179,6 +179,76 @@ def update_event():
     })
 
 
+# Manager
+
+# endpoint POST /manager
+# Role: Admin
+@app.route('/manager', methods=['POST'])
+#@requires_auth('post:manager')
+#def add_manager(jwt):
+def add_manager():
+    try:
+        name = request.json.get('name')
+        phone = request.json.get('phone')
+        website = request.json.get('website')
+        image_link = request.json.get('image_link')
+        
+    except Exception:
+        print("in except", file = sys.stderr)
+        abort(400, "add manager request has missing parameters")
+        
+    if not name:
+        print("in if", file = sys.stderr)
+        abort(422, "add manager request has missing parameters")
+        
+    try:
+        new_manager = Manager(name=name, phone=phone, website=website, image_link=image_link)
+        new_manager.insert()
+        print("NEW MANAGER ID", file = sys.stderr)
+        print(new_manager.id, file = sys.stderr)
+        
+    except Exception:
+        #db.session.rollback()
+        abort(500, "add manager request has missing parameters")
+
+    return jsonify({
+        'success':True
+    })
+
+# endpoint DELETE /manager
+# Role: Admin, Manager
+@app.route('/manager', methods=['DELETE'])
+#@requires_auth('delete:manager')
+#def delete_manager(jwt):
+def delete_manager():
+    try:
+        manager_id = request.json.get('id')
+        
+    except Exception:
+        print("in except", file = sys.stderr)
+        abort(400, "delete manager request has missing parameters")
+        
+    if not event_id:
+        print("in if", file = sys.stderr)
+        abort(422, "delete manager request has missing parameters")
+
+    try:
+        manager = Manager.query.get(manager_id)
+
+    except Exception:
+        print("in except", file = sys.stderr)
+        abort(422, "delete manager request has missing parameters")
+
+    if not manager:
+        abort(404, "delete manager request has missing parameters")
+
+    try:
+        manager.delete()
+
+    except Exception:
+        #db.session.rollback()
+        abort(500, "delete manager request has missing parameters")
+
     return jsonify({
         'success': True
     })
