@@ -4,6 +4,14 @@ from flask_sqlalchemy import SQLAlchemy
 #from sqlalchemy import exc
 import json
 
+'''
+from decouple import config
+#database_name = "test"
+#postgresql://{user_name}:{password}@{host_name:host_port}/{database_name}"
+#database_path = "postgresql://{}:{}@{}/{}".format('postgres', 'root', 'localhost:5432', database_name)
+database_path = os.environ['DATABASE_URL']
+'''
+
 database_name = "eventos"
 database_path = "postgresql://{}/{}".format('localhost:5432', database_name)
 db = SQLAlchemy()
@@ -33,7 +41,7 @@ class Event(db.Model):
   city = db.Column(db.String(120))
   date = db.Column(db.DateTime)
   image_link = db.Column(db.String(500))
-  manager_id = db.Column(db.Integer, db.ForeignKey('managers.id', ondelete="CASCADE"), nullable=False)
+  manager_id = db.Column(db.Integer, db.ForeignKey('managers.id', ondelete="CASCADE"))
   event_attendance = db.relationship('EventAttendance', backref='event', lazy=True, cascade="all, delete-orphan")
   
   def __repr__(self):
