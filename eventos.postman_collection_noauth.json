@@ -1,0 +1,588 @@
+{
+	"info": {
+		"_postman_id": "f4ea1fc2-5b23-45d7-95bd-c0ae3c9412fd",
+		"name": "eventos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Manager",
+			"item": [
+				{
+					"name": "get managers",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post manager1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"manager-1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post manager2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"manager-2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete manager2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get managers",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlZXWTJZNnZjZjV4WU1JZWc4S0s0RyJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZXZlbnRvcy51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAxMWFjZGNkZjdiNWEwMDcxOGRmMTMwIiwiYXVkIjoiRXZlbnRvcyIsImlhdCI6MTYxMjAzNTM2MCwiZXhwIjoxNjEyMDQyNTYwLCJhenAiOiJ5RTFNWTJvUUxSYUJkUHJBbGF1MEMzd0t2bU1JOW05RCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmV2ZW50IiwiZGVsZXRlOm1hbmFnZXIiLCJkZWxldGU6cGFydGljaXBhbnQiLCJwYXRjaDpldmVudCIsInBvc3Q6ZXZlbnQiLCJwb3N0Om1hbmFnZXIiLCJwb3N0OnBhcnRpY2lwYW50Il19.dK2mrNMu-dObVEngQ-W-VEpr7MyP2IYVVC3nDp_8AYvPKYRRauRpKihIrtvj07OdwErXiNWsYFJI5i_02BbMpFUaLbBN6a49UC98nte0NEcRR4NgtUU6Qe8yvBZUhj5yELlU5y2LWOdWJcrEC2wb7l0GPSkVkVSIGFOdW5c99cODQ5Fz0qGLpm0Al41BErznWJNjAJs8JGv6PtfTpNg-sbfhBw38HUDwZTDYw65Ad2QqIvYZjy6GBJNluOK84VFVjOONaO8GWdj74XrsMW1Tq3MF78md6WrZv-w5lu8ynU4zCba98T8IJmdmHdAYsstnzuQxvNOP6HcSgS6By7rMPw",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Event",
+			"item": [
+				{
+					"name": "get events",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/event",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post event1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"event-1\",\n    \"manager_id\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/event",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post event2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"event-2\",\n    \"manager_id\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/event",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete event2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/event",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch event1",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1,\n    \"name\": \"event-updated\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/event",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get events",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/event",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"event"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlZXWTJZNnZjZjV4WU1JZWc4S0s0RyJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZXZlbnRvcy51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAxMWFjOTU1MTg1M2IwMDZhMDEzMDY2IiwiYXVkIjoiRXZlbnRvcyIsImlhdCI6MTYxMjAzNTA4MiwiZXhwIjoxNjEyMDQyMjgyLCJhenAiOiJ5RTFNWTJvUUxSYUJkUHJBbGF1MEMzd0t2bU1JOW05RCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmV2ZW50IiwicGF0Y2g6ZXZlbnQiLCJwb3N0OmV2ZW50Il19.fagSOgUeoGKj1EL5WpJiU-n8FMZuPeyeB7-fVVvHzXO5EyVtI1IUO-FAuQ-xofE-D5CL7O4e_zwcxjlvIU9CiVs_yexPzcRGYhqniTUywB9X8NZTAsizK6GKpTJ2W8AFgE_0SdBmWl3Y4oBRVHt2PvTtvQM31LfPS6BnjGFHLiqSkIdUYtDh3cIQlZUV26Vzw-GIuHrHGCMuuL3NwEVjIh9qSx_d5ZuA3oGbQO-fJ73ebza7VMe6aPrOXES5pl_6F7ZFecZLNi0V5_mg7_vy2Wu62I1M9TvzfWEsr_CdNiqfSgyUxQ07rVm-qx7CNCE-dYbT3HuyRbS2YdBta4Ftbg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Participant",
+			"item": [
+				{
+					"name": "get participants",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlZXWTJZNnZjZjV4WU1JZWc4S0s0RyJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZXZlbnRvcy51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAxMWFjZGNkZjdiNWEwMDcxOGRmMTMwIiwiYXVkIjoiRXZlbnRvcyIsImlhdCI6MTYxMjAzNTM2MCwiZXhwIjoxNjEyMDQyNTYwLCJhenAiOiJ5RTFNWTJvUUxSYUJkUHJBbGF1MEMzd0t2bU1JOW05RCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmV2ZW50IiwiZGVsZXRlOm1hbmFnZXIiLCJkZWxldGU6cGFydGljaXBhbnQiLCJwYXRjaDpldmVudCIsInBvc3Q6ZXZlbnQiLCJwb3N0Om1hbmFnZXIiLCJwb3N0OnBhcnRpY2lwYW50Il19.dK2mrNMu-dObVEngQ-W-VEpr7MyP2IYVVC3nDp_8AYvPKYRRauRpKihIrtvj07OdwErXiNWsYFJI5i_02BbMpFUaLbBN6a49UC98nte0NEcRR4NgtUU6Qe8yvBZUhj5yELlU5y2LWOdWJcrEC2wb7l0GPSkVkVSIGFOdW5c99cODQ5Fz0qGLpm0Al41BErznWJNjAJs8JGv6PtfTpNg-sbfhBw38HUDwZTDYw65Ad2QqIvYZjy6GBJNluOK84VFVjOONaO8GWdj74XrsMW1Tq3MF78md6WrZv-w5lu8ynU4zCba98T8IJmdmHdAYsstnzuQxvNOP6HcSgS6By7rMPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/participant",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"participant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post participant1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlZXWTJZNnZjZjV4WU1JZWc4S0s0RyJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZXZlbnRvcy51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAxMWFjYzA0NDFmZDYwMDcwODI0YzBiIiwiYXVkIjoiRXZlbnRvcyIsImlhdCI6MTYxMjAzNTUyMCwiZXhwIjoxNjEyMDQyNzIwLCJhenAiOiJ5RTFNWTJvUUxSYUJkUHJBbGF1MEMzd0t2bU1JOW05RCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnBhcnRpY2lwYW50IiwicG9zdDpwYXJ0aWNpcGFudCJdfQ.eNkQeyJPehD3rxu3Nz13c6WEUHpuQ-uj_SjI-3iot3_RIZ-TAN25KXlSZROe6So2jgmAl2gybvo0rwkTt3Bf-fh2CHzgMf8s4XNEX5IMnXz6adAnw-71QG-tQeaLNHwaIOn-LGCJd2HO3XetJxuUtJd0PY9Z1106JlPNRgc8H2dBiQ205rFV0OiixusRdCAbiiDNqRbHnkHGUbTYdzM1nvU5LzRqp5HXXt23BpL6SiJe5lOLSD77VkdNoc4xZbPNLnuD2H9lAXuYQzKiIYOJWBjSLxxEl1ncgGrs1D2A8_pOg8U0YEe0VJrQ2P3xcQhb79Eg6yij-LbWZavo0qv3zA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"participant-1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/participant",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"participant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post participant2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlZXWTJZNnZjZjV4WU1JZWc4S0s0RyJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZXZlbnRvcy51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAxMWFjYzA0NDFmZDYwMDcwODI0YzBiIiwiYXVkIjoiRXZlbnRvcyIsImlhdCI6MTYxMjAzNTUyMCwiZXhwIjoxNjEyMDQyNzIwLCJhenAiOiJ5RTFNWTJvUUxSYUJkUHJBbGF1MEMzd0t2bU1JOW05RCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnBhcnRpY2lwYW50IiwicG9zdDpwYXJ0aWNpcGFudCJdfQ.eNkQeyJPehD3rxu3Nz13c6WEUHpuQ-uj_SjI-3iot3_RIZ-TAN25KXlSZROe6So2jgmAl2gybvo0rwkTt3Bf-fh2CHzgMf8s4XNEX5IMnXz6adAnw-71QG-tQeaLNHwaIOn-LGCJd2HO3XetJxuUtJd0PY9Z1106JlPNRgc8H2dBiQ205rFV0OiixusRdCAbiiDNqRbHnkHGUbTYdzM1nvU5LzRqp5HXXt23BpL6SiJe5lOLSD77VkdNoc4xZbPNLnuD2H9lAXuYQzKiIYOJWBjSLxxEl1ncgGrs1D2A8_pOg8U0YEe0VJrQ2P3xcQhb79Eg6yij-LbWZavo0qv3zA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"participant-2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/participant",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"participant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete participant2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlZXWTJZNnZjZjV4WU1JZWc4S0s0RyJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZXZlbnRvcy51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAxMWFjYzA0NDFmZDYwMDcwODI0YzBiIiwiYXVkIjoiRXZlbnRvcyIsImlhdCI6MTYxMjAzNTUyMCwiZXhwIjoxNjEyMDQyNzIwLCJhenAiOiJ5RTFNWTJvUUxSYUJkUHJBbGF1MEMzd0t2bU1JOW05RCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnBhcnRpY2lwYW50IiwicG9zdDpwYXJ0aWNpcGFudCJdfQ.eNkQeyJPehD3rxu3Nz13c6WEUHpuQ-uj_SjI-3iot3_RIZ-TAN25KXlSZROe6So2jgmAl2gybvo0rwkTt3Bf-fh2CHzgMf8s4XNEX5IMnXz6adAnw-71QG-tQeaLNHwaIOn-LGCJd2HO3XetJxuUtJd0PY9Z1106JlPNRgc8H2dBiQ205rFV0OiixusRdCAbiiDNqRbHnkHGUbTYdzM1nvU5LzRqp5HXXt23BpL6SiJe5lOLSD77VkdNoc4xZbPNLnuD2H9lAXuYQzKiIYOJWBjSLxxEl1ncgGrs1D2A8_pOg8U0YEe0VJrQ2P3xcQhb79Eg6yij-LbWZavo0qv3zA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/participant",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"participant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get participants",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlZXWTJZNnZjZjV4WU1JZWc4S0s0RyJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZXZlbnRvcy51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAxMWFjZGNkZjdiNWEwMDcxOGRmMTMwIiwiYXVkIjoiRXZlbnRvcyIsImlhdCI6MTYxMjAzNTM2MCwiZXhwIjoxNjEyMDQyNTYwLCJhenAiOiJ5RTFNWTJvUUxSYUJkUHJBbGF1MEMzd0t2bU1JOW05RCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmV2ZW50IiwiZGVsZXRlOm1hbmFnZXIiLCJkZWxldGU6cGFydGljaXBhbnQiLCJwYXRjaDpldmVudCIsInBvc3Q6ZXZlbnQiLCJwb3N0Om1hbmFnZXIiLCJwb3N0OnBhcnRpY2lwYW50Il19.dK2mrNMu-dObVEngQ-W-VEpr7MyP2IYVVC3nDp_8AYvPKYRRauRpKihIrtvj07OdwErXiNWsYFJI5i_02BbMpFUaLbBN6a49UC98nte0NEcRR4NgtUU6Qe8yvBZUhj5yELlU5y2LWOdWJcrEC2wb7l0GPSkVkVSIGFOdW5c99cODQ5Fz0qGLpm0Al41BErznWJNjAJs8JGv6PtfTpNg-sbfhBw38HUDwZTDYw65Ad2QqIvYZjy6GBJNluOK84VFVjOONaO8GWdj74XrsMW1Tq3MF78md6WrZv-w5lu8ynU4zCba98T8IJmdmHdAYsstnzuQxvNOP6HcSgS6By7rMPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/participant",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"participant"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
