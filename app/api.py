@@ -26,7 +26,7 @@ def after_request(response):
 
 # Event
 
-# endpoint GET /events
+# endpoint GET /
 # public endpoint
 @app.route('/', methods=['GET'])
 def index():
@@ -34,7 +34,7 @@ def index():
         'success':True
     })
 
-# endpoint GET /events
+# endpoint GET /event
 # public endpoint
 # TODO: paging
 @app.route('/event', methods=['GET'])
@@ -53,9 +53,9 @@ def get_events():
 # endpoint POST /event
 # Role: Admin, Manager
 @app.route('/event', methods=['POST'])
-#@requires_auth('post:event')
-#def add_event(jwt):
-def add_event():
+@requires_auth('post:event')
+def add_event(jwt):
+#def add_event():   #for no authorization
     try:
         name = request.json.get('name')
         genre = request.json.get('genre')
@@ -91,9 +91,9 @@ def add_event():
 # endpoint DELETE /event
 # Role: Admin, Manager
 @app.route('/event', methods=['DELETE'])
-#@requires_auth('delete:event')
-#def delete_event(jwt):
-def delete_event():
+@requires_auth('delete:event')
+def delete_event(jwt):
+#def delete_event():    #for no authorization
     try:
         event_id = request.json.get('id')
         
@@ -127,12 +127,12 @@ def delete_event():
         'deleted': event.format()
     })
 
-# endpoint PATCH /events/<id>
+# endpoint PATCH /event
 # Role: Admin, Manager
 @app.route('/event', methods=['PATCH'])
-#@requires_auth('patch:event')
-#def update_event(jwt, event_id):
-def update_event():
+@requires_auth('patch:event')
+def update_event(jwt):
+#def update_event():    #for no authorization
     try:
         event_id = request.json.get('id')
         
@@ -192,8 +192,8 @@ def update_event():
 
 # Manager
 
-# endpoint GET /managers
-# Role: Admin
+# endpoint GET /manager
+# public endpoint
 @app.route('/manager', methods=['GET'])
 def get_managers():
     try:
@@ -210,9 +210,9 @@ def get_managers():
 # endpoint POST /manager
 # Role: Admin
 @app.route('/manager', methods=['POST'])
-#@requires_auth('post:manager')
-#def add_manager(jwt):
-def add_manager():
+@requires_auth('post:manager')
+def add_manager(jwt):
+#def add_manager(): #for no authorization
     try:
         name = request.json.get('name')
         phone = request.json.get('phone')
@@ -243,11 +243,11 @@ def add_manager():
     })
 
 # endpoint DELETE /manager
-# Role: Admin, Manager
+# Role: Admin
 @app.route('/manager', methods=['DELETE'])
-#@requires_auth('delete:manager')
-#def delete_manager(jwt):
-def delete_manager():
+@requires_auth('delete:manager')
+def delete_manager(jwt):
+#def delete_manager():  #for no authorization
     try:
         manager_id = request.json.get('id')
         
@@ -286,7 +286,7 @@ def delete_manager():
 
 # Participant
 
-# endpoint GET /managers
+# endpoint GET /participant
 # Role: Admin
 @app.route('/participant', methods=['GET'])
 def get_participants():
@@ -302,11 +302,11 @@ def get_participants():
     })
 
 # endpoint POST /participant
-# Role: Participant
+# Role: Admin, Manager, Participant
 @app.route('/participant', methods=['POST'])
-#@requires_auth('post:participant')
-#def add_participant(jwt):
-def add_participant():
+@requires_auth('post:participant')
+def add_participant(jwt):
+#def add_participant(): #for no authorization
     try:
         name = request.json.get('name')
         phone = request.json.get('phone')
@@ -334,12 +334,12 @@ def add_participant():
         'participant': new_participant.format()
     })
 
-# endpoint DELETE /events/<id>/<id>
-# Role: Participant
+# endpoint DELETE /participant
+# Role: Admin, Manager, Participant
 @app.route('/participant', methods=['DELETE'])
-#@requires_auth('delete:participant')
-#def delete_participant(jwt, event_id, participant_id):
-def delete_participant():
+@requires_auth('delete:participant')
+def delete_participant(jwt):
+#def delete_participant():  #for no authorization
     try:
         participant_id = request.json.get('id')
         
