@@ -34,6 +34,7 @@ After installing the requirements, preparing the environment, cloning or downloa
 ## Testing
 The testing of all endpoints was implemented with `unittest`. Each endpoint can be tested with one success test case and one error test case. RBAC feature can also be tested for participant, manager, and admin.
 #### Testing Setup
+> Note: you need to change your working directory to the root `/` directory of the project, and you need have your database server started.
 1. Run `createdb test_eventos`, to create a DB with the name `test_eventos` for testing purpose.
 2. Run `psql eventos < eventos.psql`, to populate tables with some predefined data.
 3. Run `python3 test_app.py`, to execute test cases
