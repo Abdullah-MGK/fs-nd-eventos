@@ -75,7 +75,10 @@ class EventosTestCase(unittest.TestCase):
     #POST /manager
     def test_post_manager_1(self):
         data = {
-            "name":"manager-1"
+            "name":"manager-1",
+            "phone":"0501234567",
+            "website":"www.google.com",
+            "image_link":"https://www.crucial.com.au/blog/wp-content/uploads/2014/12/events_medium.jpg"
         }        
         res = self.client().post('/manager', json=data, headers=self.admin_token)
         data = json.loads(res.data)
@@ -86,8 +89,11 @@ class EventosTestCase(unittest.TestCase):
     #POST /manager
     def test_post_manager_2(self):
         data = {
-            "name":"manager-2"
-        }
+            "name":"manager-2",
+            "phone":"0507654321",
+            "website":"www.facebook.com",
+            "image_link":"https://www.crucial.com.au/blog/wp-content/uploads/2014/12/events_medium.jpg"
+        } 
         res = self.client().post('/manager', json=data, headers=self.admin_token)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
@@ -128,7 +134,11 @@ class EventosTestCase(unittest.TestCase):
     def test_post_event_1(self):
         data = {
             "name":"event-1",
-            "manager_id":1
+            "manager_id":1,
+            "genre":["Music"],
+            "province": "Eastern",
+            "city": "Khobar",
+            "image_link": "https://www.crucial.com.au/blog/wp-content/uploads/2014/12/events_medium.jpg"
         }
         res = self.client().post('/event', json=data, headers=self.manager_token)
         data = json.loads(res.data)
@@ -140,7 +150,11 @@ class EventosTestCase(unittest.TestCase):
     def test_post_event_2(self):
         data = {
             "name":"event-2",
-            "manager_id":1
+            "manager_id":1,
+            "genre":["Movie"],
+            "province": "Western",
+            "city": "Jeddah",
+            "image_link": "https://www.crucial.com.au/blog/wp-content/uploads/2014/12/events_medium.jpg"
         }
         res = self.client().post('/event', json=data, headers=self.manager_token)
         data = json.loads(res.data)
@@ -193,7 +207,8 @@ class EventosTestCase(unittest.TestCase):
     #POST /participant
     def test_post_participant_1(self):
         data = {
-            "name":"participant-1"
+            "name":"participant-1",
+            "phone":"0504567123"
         }
         res = self.client().post('/participant', json=data, headers=self.participant_token)
         data = json.loads(res.data)
@@ -204,7 +219,8 @@ class EventosTestCase(unittest.TestCase):
     #POST /participant
     def test_post_participant_2(self):
         data = {
-            "name":"participant-2"
+            "name":"participant-2",
+            "phone":"0501122334"
         }
         res = self.client().post('/participant', json=data, headers=self.participant_token)
         data = json.loads(res.data)
