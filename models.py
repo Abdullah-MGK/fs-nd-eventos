@@ -57,7 +57,8 @@ class Event(db.Model):
       'province': self.province,
       'city': self.city,
       'date': self.date,
-      'image_link': self.image_link
+      'image_link': self.image_link,
+      'manager_id': self.manager_id
     }
   
   def insert(self):
