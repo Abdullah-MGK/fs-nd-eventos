@@ -3,8 +3,8 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 import unittest
 from api import app
-from models import setup_db, db_create_all
-from models import Event, Manager, Participant, EventAttendance
+#from models import setup_db, db_create_all
+#from models import Event, Manager, Participant, EventAttendance
 
 
 class EventosTestCase(unittest.TestCase):
@@ -15,21 +15,24 @@ class EventosTestCase(unittest.TestCase):
     participant_id = 0
     
     def setUp(self):
-        """Define test variables and initialize app."""
-        self.app = app
-        self.client = self.app.test_client
+        #Define test variables and initialize app
+        #self.app = app
+        #self.client = self.app.test_client
+        self.client = app.test_client
         self.database_name = "eventos_test"
         self.database_domain = "localhost:5432"
         self.database_path = "postgresql://{}/{}".format(self.database_domain, self.database_name)
-        setup_db(self.app, self.database_path)
-        db_create_all()
+        #setup_db(self.app, self.database_path)
+        #db_drop_and_create_all()
         
+        '''
         # binds the app to the current context
         with self.app.app_context():
             self.db = SQLAlchemy()
             self.db.init_app(self.app)
-            # create all tables
+            self.db.drop_all()
             self.db.create_all()
+        '''
     
     def tearDown(self):
         """Executed after each test"""
@@ -67,7 +70,7 @@ class EventosTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(len(data['manager']), 1)
+        self.assertEqual(data['manager']['name'], "manager-1")
 
     #POST /manager
     def test_post_manager_2(self):
@@ -78,7 +81,7 @@ class EventosTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(len(data['manager']), 2)
+        self.assertEqual(data['manager']['name'], "manager-2")
 
     # DELETE /manager
     def test_delete_manager(self):
@@ -120,7 +123,7 @@ class EventosTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(len(data['event']), 1)
+        self.assertEqual(data['event']['name'], "event-1")
 
     #POST /event
     def test_post_event_2(self):
@@ -132,7 +135,7 @@ class EventosTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(len(data['event']), 2)
+        self.assertEqual(data['event']['name'], "event-2")
 
     # DELETE /event
     def test_delete_event(self):
@@ -155,7 +158,7 @@ class EventosTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(len(data['event']['name']), "event-updated")
+        self.assertEqual(data['event']['name'], "event-updated")
 
     # GET /event
     def test_get_event_2(self):
@@ -185,7 +188,7 @@ class EventosTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(len(data['participant']), 1)
+        self.assertEqual(data['participant']['name'], "participant-1")
 
     #POST /participant
     def test_post_participant_2(self):
@@ -196,7 +199,7 @@ class EventosTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(len(data['participant']), 2)
+        self.assertEqual(data['participant']['name'], "participant-2")
 
     # DELETE /participant
     def test_delete_participant(self):
@@ -246,7 +249,6 @@ def suite():
     suite.addTest(EventosTestCase('test_delete_participant'))
     suite.addTest(EventosTestCase('test_get_participant_2'))
     
-
     return suite
 
 
