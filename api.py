@@ -14,16 +14,16 @@ app = Flask(__name__)
 CORS(app)
 
 #NOTE: For Local Setup
-database_name = "eventos"
-database_domain = "localhost:5432"
-database_path = "postgresql://{}/{}".format(database_domain, database_name)
+#database_name = "eventos"
+#database_domain = "localhost:5432"
+#database_path = "postgresql://{}/{}".format(database_domain, database_name)
 
 #NOTE: For Heroku Setup
-#database_path = os.environ['DATABASE_URL']
+database_path = os.environ['DATABASE_URL']
 
 setup_db(app, database_path)
 
-#NOTE: comment this for Heroku Setup
+#NOTE: For Local Setup
 #db_create_all()
 
 
