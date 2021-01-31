@@ -5,25 +5,16 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 #from decouple import config
 
-database_name = "eventos"
-
-#NOTE: For Local Setup
-database_domain = "localhost:5432"
-database_path = "postgresql://{}/{}".format(database_domain, database_name)
-
-#NOTE: For Heroku Setup
-#database_path = os.environ['DATABASE_URL'] 
-
 db = SQLAlchemy()
 
 # binds a flask application and a SQLAlchemy service
-def setup_db(app, database_path=database_path):
+def setup_db(app, database_path):
   app.config["SQLALCHEMY_DATABASE_URI"] = database_path
   app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
   db.app = app
   db.init_app(app)
 
-  #NOTE: comment this for Heroku Setup
+def db_create_all():
   db.create_all()
 
 def db_drop_and_create_all():

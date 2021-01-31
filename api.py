@@ -6,14 +6,26 @@ from flask import Flask, request, jsonify, abort
 #from sqlalchemy import exc
 from flask_cors import CORS
 from auth import AuthError, requires_auth
-from models import setup_db, db_drop_and_create_all
+from models import setup_db, db_create_all
 from models import Event, Manager, Participant, EventAttendance
 
 
 app = Flask(__name__)
 CORS(app)
-setup_db(app)
-#db_drop_and_create_all()
+
+#NOTE: For Local Setup
+database_name = "eventos_test"
+database_domain = "localhost:5432"
+database_path = "postgresql://{}/{}".format(database_domain, database_name)
+
+#NOTE: For Heroku Setup
+#database_path = os.environ['DATABASE_URL']
+
+setup_db(app, database_path)
+
+#NOTE: comment this for Heroku Setup
+db_create_all()
+
 
 @app.after_request
 def after_request(response):
