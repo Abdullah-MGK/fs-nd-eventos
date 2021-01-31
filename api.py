@@ -5,9 +5,9 @@ from flask import Flask, request, jsonify, abort
 #from flask_sqlalchemy import SQLAlchemy
 #from sqlalchemy import exc
 from flask_cors import CORS
-from .auth import AuthError, requires_auth
-from .models import setup_db, db_drop_and_create_all
-from .models import Event, Manager, Participant, EventAttendance
+from auth import AuthError, requires_auth
+from models import setup_db, db_drop_and_create_all
+from models import Event, Manager, Participant, EventAttendance
 
 
 app = Flask(__name__)
