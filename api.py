@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)
 
 #NOTE: For Local Setup
-database_name = "eventos_test"
+database_name = "eventos"
 database_domain = "localhost:5432"
 database_path = "postgresql://{}/{}".format(database_domain, database_name)
 
