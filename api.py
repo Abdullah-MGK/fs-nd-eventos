@@ -24,7 +24,7 @@ database_path = "postgresql://{}/{}".format(database_domain, database_name)
 setup_db(app, database_path)
 
 #NOTE: comment this for Heroku Setup
-db_create_all()
+#db_create_all()
 
 
 @app.after_request
