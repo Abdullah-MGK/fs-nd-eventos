@@ -23,21 +23,22 @@ After installing the requirements, preparing the environment, cloning or downloa
 #### Application Setup
 1. Navigate to the root `/` directory of the project.
 2. Run `pip install -r requirements.txt`, to install the required dependencies for the application.
-3. Go `models/models.py` and set the following variables:
-    ```python
-    database_name = "eventos"
-    #this must be the same name as you have created earlier
-    database_path = "postgresql://{}/{}".format('localhost:5432', database_name)
-    #db_url follows '[dialec]+[DBAPI(optional)]://[username]:[password(optional)]@[host]:[port]/[database_name]'
-    ```
-4. Run `FLASK_APP=app.api FLASK_DEBUG=true FLASK_ENV=development flask run --reload`, to start the flask application
+3. Run `FLASK_APP=api FLASK_DEBUG=true FLASK_ENV=development flask run --reload`, to start the flask application
 ## Testing
-The testing of all endpoints was implemented with `unittest`. Each endpoint can be tested with one success test case and one error test case. RBAC feature can also be tested for participant, manager, and admin.
-#### Testing Setup
-> Note: you need to change your working directory to the root `/` directory of the project, and you need have your database server started.
-1. Run `createdb test_eventos`, to create a DB with the name `test_eventos` for testing purpose.
-2. Run `psql eventos < eventos.psql`, to populate tables with some predefined data.
-3. Run `python3 test_app.py`, to execute test cases
+- Testing of all endpoints was implemented with `unittest` and `postman`.
+- Each endpoint can be tested with one success test case and one error test case.
+- However, public endpoints `GET /endpoint` do not have error test case.
+- RBAC feature can also be tested for participant, manager, and admin.
+#### Testing Setup `unittest`
+1. Run `createdb eventos_test`, to create a DB with the name `eventos_test` for testing purpose.
+    > Note: you might need to change your working directory to where you have initiated the DB Server, and you need have your database server started.
+2. Run `python3 test_app.py`, to execute test cases
+#### Testing Setup `postman`
+Open Postman, Import collection, Start runner.
+- `eventos.postman_collection_heroku.json` : 
+for live testing on heroku with auth enabled 
+- `eventos.postman_collection_auth.json`: for local testing with auth enabled
+- `eventos.postman_collection_noauth.json`: for local testing with auth disabled
 ## Data Models
 #### events
 - Description: an event is the core data of the system.
@@ -46,7 +47,7 @@ The testing of all endpoints was implemented with `unittest`. Each endpoint can 
     ```json
     id: integer
     name: string
-    genre: [string]
+    genre: [ string ]
     province: string
     city: string
     date: datetime
