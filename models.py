@@ -70,6 +70,9 @@ class Event(db.Model):
     def update(self):
         db.session.commit()
 
+    def rollback(self):
+        db.session.rollback()
+
 
 # Manager
 class Manager(db.Model):
@@ -106,6 +109,9 @@ class Manager(db.Model):
     def update(self):
         db.session.commit()
 
+    def rollback(self):
+        db.session.rollback()
+
 
 # Participant
 class Participant(db.Model):
@@ -138,6 +144,9 @@ class Participant(db.Model):
 
     def update(self):
         db.session.commit()
+
+    def rollback(self):
+        db.session.rollback()
 
 
 class EventAttendance(db.Model):

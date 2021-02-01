@@ -101,7 +101,7 @@ def add_event(jwt):
         print(new_event.id, file=sys.stderr)
 
     except Exception:
-        # db.session.rollback()
+        new_event.rollback()
         abort(500, "add event request has missing parameters")
 
     return jsonify({
@@ -142,7 +142,7 @@ def delete_event(jwt):
         event.delete()
 
     except Exception:
-        # db.session.rollback()
+        event.rollback()
         abort(500, "delete event request has missing parameters")
 
     return jsonify({
@@ -206,7 +206,7 @@ def update_event(jwt):
         event.update()
 
     except Exception:
-        # db.session.rollback()
+        event.rollback()
         abort(500, "update event request has missing parameters")
 
     return jsonify({
@@ -262,7 +262,7 @@ def add_manager(jwt):
         print(new_manager.id, file=sys.stderr)
 
     except Exception:
-        # db.session.rollback()
+        new_manager.rollback()
         abort(500, "add manager request has missing parameters")
 
     return jsonify({
@@ -305,7 +305,7 @@ def delete_manager(jwt):
         manager.delete()
 
     except Exception:
-        # db.session.rollback()
+        manager.rollback()
         abort(500, "delete manager request has missing parameters")
 
     return jsonify({
@@ -358,7 +358,7 @@ def add_participant(jwt):
         print(new_participant.id, file=sys.stderr)
 
     except Exception:
-        # db.session.rollback()
+        new_participant.rollback()
         abort(500, "add participant request has missing parameters")
 
     return jsonify({
@@ -399,7 +399,7 @@ def delete_participant(jwt):
         participant.delete()
 
     except Exception:
-        # db.session.rollback()
+        participant.rollback()
         abort(500, "delete participant request has missing parameters")
 
     return jsonify({
