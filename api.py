@@ -14,7 +14,6 @@ app = Flask(__name__)
 CORS(app)
 PUBLIC_RUN = os.environ.get('PUBLIC_RUN').lower() in ['true', '1']
 TESTING_RUN = os.environ.get('TESTING_RUN').lower() in ['true', '1']
-DATABASE_URL = ""
 
 print("PUBLIC_RUN", file=sys.stderr)
 print(PUBLIC_RUN, file=sys.stderr)
