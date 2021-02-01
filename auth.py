@@ -1,5 +1,5 @@
+import os
 import json
-import sys
 from flask import request, _request_ctx_stack
 from functools import wraps
 from jose import jwt
@@ -10,12 +10,16 @@ from urllib.request import urlopen
 # part1@ev.com : part1@ev.com : participant
 # admin1@ev.com : admin1@ev.com : admin
 
-AUTH0_DOMAIN = 'fsnd-eventos.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'Eventos'
+AUTH0_DOMAIN = os.environ.get(
+    'AUTH0_DOMAIN', "AUTH0_DOMAIN not found in environment")
+ALGORITHMS = os.environ.get(
+    'ALGORITHMS', "ALGORITHMS not found in environment")
+API_AUDIENCE = os.environ.get(
+    'API_AUDIENCE', "API_AUDIENCE not found in environment")
 
 
 # AuthError Exception
+
 
 class AuthError(Exception):
     def __init__(self, error, status_code):
