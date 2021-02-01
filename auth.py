@@ -14,7 +14,8 @@ AUTH0_DOMAIN = 'fsnd-eventos.us.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'Eventos'
 
-## AuthError Exception
+
+# AuthError Exception
 
 class AuthError(Exception):
     def __init__(self, error, status_code):
@@ -22,7 +23,7 @@ class AuthError(Exception):
         self.status_code = status_code
 
 
-## Auth Header
+# Auth Header
 
 # get_token_auth_header() method
 def get_token_auth_header():
@@ -41,40 +42,46 @@ def get_token_auth_header():
     # checkes if Authorization is a bearer token
     if auth_header_parts[0].lower() != 'bearer':
         raise AuthError('Not A Bearer Token!', 401)
-    
+
     # returns the token part of the header
     token = auth_header_parts[1]
     return token
 
+
 # check_permissions(permission, payload) method
+
+
 def check_permissions(permission, payload):
     # checks if 'permissions' is included in the payload
     if 'permissions' not in payload:
         raise AuthError('No Permissions In Token!', 401)
-    
+
     # checks if the required permission is in the payload permissions
     if permission not in payload['permissions']:
         raise AuthError('No Permission Found!', 401)
-    
+
     # returns true if success
     return True
 
+
 # verify_decode_jwt(token) method
+
+
 def verify_decode_jwt(token):
     # gets the public key from Auth0
     jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
     jwks = json.loads(jsonurl.read())
-    
+
     # gets data from token
     unverified_header = jwt.get_unverified_header(token)
-    
+
     # choose RSA key
     rsa_key = {}
 
     # checks if token has 'kid'
     if 'kid' not in unverified_header:
         raise AuthError('No Kid In Headers!', 401)
-    
+
     # assigns rsa_key to token[kid]
     for key in jwks['keys']:
         if key['kid'] == unverified_header['kid']:
@@ -88,7 +95,7 @@ def verify_decode_jwt(token):
 
     if not rsa_key:
         raise AuthError("No RSA Key!", 401)
-    
+
     # verifies token
     if rsa_key:
         # returns the payload if success
@@ -101,7 +108,7 @@ def verify_decode_jwt(token):
                 issuer='https://' + AUTH0_DOMAIN + '/'
             )
             return payload
-        
+
         except jwt.ExpiredSignatureError:
             raise AuthError("Expired Token!", 401)
 
@@ -111,7 +118,10 @@ def verify_decode_jwt(token):
         except Exception:
             raise AuthError("Invalid Token!", 401)
 
+
 # @requires_auth(permission) decorator method
+
+
 def requires_auth(permission=''):
     def requires_auth_decorator(f):
         @wraps(f)
