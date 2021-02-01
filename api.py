@@ -12,19 +12,29 @@ from models import Event, Manager, Participant, EventAttendance
 
 app = Flask(__name__)
 CORS(app)
+PUBLIC_RUN = os.environ.get('PUBLIC_RUN').lower() in ['true', '1']
+TESTING_RUN = os.environ.get('TESTING_RUN').lower() in ['true', '1']
+DATABASE_URL = ""
 
-# NOTE: For Local Setup
-# database_name = "eventos"
-# database_domain = "localhost:5432"
-# database_path = "postgresql://{}/{}".format(database_domain, database_name)
+print("PUBLIC_RUN", file=sys.stderr)
+print(PUBLIC_RUN, file=sys.stderr)
+print("TESTING_RUN", file=sys.stderr)
+print(TESTING_RUN, file=sys.stderr)
 
-# NOTE: For Heroku Setup
-database_path = os.environ['DATABASE_URL']
-
-setup_db(app, database_path)
-
-# NOTE: For Local Setup
-# db_create_all()
+if PUBLIC_RUN:
+    print("public", file=sys.stderr)
+    DATABASE_URL = os.environ.get(
+        'DATABASE_URL', "DATABASE_URL not found in env")
+elif TESTING_RUN:
+    print("local testing", file=sys.stderr)
+    DATABASE_URL = os.environ.get(
+        'TETSING_DATABASE_URL', "TETSING_DATABASE_URL not found in env")
+else:
+    print("local", file=sys.stderr)
+    DATABASE_URL = os.environ.get(
+        'LOCAL_DATABASE_URL', "LOCAL_DATABASE_URL not found in env")
+setup_db(app, DATABASE_URL)
+db_create_all()
 
 
 @app.after_request

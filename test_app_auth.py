@@ -6,6 +6,17 @@ from api import app
 # from models import db_drop_and_create_all
 # from models import Event, Manager, Participant, EventAttendance
 
+ADMIN_TOKEN = os.environ.get(
+    'ADMIN_TOKEN', "ADMIN_TOKEN not found in environment")
+MANAGER_TOKEN = os.environ.get(
+    'MANAGER_TOKEN', "MANAGER_TOKEN not found in environment")
+PARTICIPANT_TOKEN = os.environ.get(
+    'PARTICIPANT_TOKEN', "PARTICIPANT_TOKEN not found in environment")
+
+ADMIN_AUTH = ({'Authorization': 'Bearer ' + ADMIN_TOKEN})
+MANAGER_AUTH = ({'Authorization': 'Bearer ' + MANAGER_TOKEN})
+PARTICIPANT_AUTH = ({'Authorization': 'Bearer ' + PARTICIPANT_TOKEN})
+
 
 class EventosTestCase(unittest.TestCase):
     """This class represents the eventos test case"""
@@ -19,24 +30,19 @@ class EventosTestCase(unittest.TestCase):
     # part1@ev.com : part1@ev.com : participant
     # admin1@ev.com : admin1@ev.com : admin
 
-    admin_token = ({'Authorization': 'Bearer ' + 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlZXWTJZNnZjZjV4WU1JZWc4S0s0RyJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZXZlbnRvcy51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAxMWFjZGNkZjdiNWEwMDcxOGRmMTMwIiwiYXVkIjoiRXZlbnRvcyIsImlhdCI6MTYxMjExMjA4OCwiZXhwIjoxNjEyMTE5Mjg4LCJhenAiOiJ5RTFNWTJvUUxSYUJkUHJBbGF1MEMzd0t2bU1JOW05RCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmV2ZW50IiwiZGVsZXRlOm1hbmFnZXIiLCJkZWxldGU6cGFydGljaXBhbnQiLCJwYXRjaDpldmVudCIsInBvc3Q6ZXZlbnQiLCJwb3N0Om1hbmFnZXIiLCJwb3N0OnBhcnRpY2lwYW50Il19.0UjuQSuDvAeOi6_UdRdIW_PhzKp-3cvfbls1DiUCP7TO0vO8TEcjPMlBNWxB6ersy5oWZsQoUpE98dOxASBQhZ_vLPb5wfE2Hz1QIYUYEYhaHIFxThjtRvYF6aj8-GeolNcpYMimREQfMVTndP3tQP_0Dsrf87EHrwNNpxUHZZq_FsztppUCrxKL57XxuGd-ZbMALUCtsHaDFNTfCb7ZFdoEvuIXnGAGzevmRHNm5hagotVQCCnXgrtukk3CF7YKS4UeMHM2L3AabChTFlyu3BmeyNzeNpc8zzeEJpvCok7hrIuxNgiXFd5oWDchbgrdZ9fN-qD77shPGRiusbEyCw'})
-
-    manager_token = ({'Authorization': 'Bearer ' + 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlZXWTJZNnZjZjV4WU1JZWc4S0s0RyJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZXZlbnRvcy51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAxMWFjOTU1MTg1M2IwMDZhMDEzMDY2IiwiYXVkIjoiRXZlbnRvcyIsImlhdCI6MTYxMjExMjEyMSwiZXhwIjoxNjEyMTE5MzIxLCJhenAiOiJ5RTFNWTJvUUxSYUJkUHJBbGF1MEMzd0t2bU1JOW05RCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmV2ZW50IiwicGF0Y2g6ZXZlbnQiLCJwb3N0OmV2ZW50Il19.QZSyof3QfNDJulRWj3CuR8lMq10XBkQ_ddLOjOzi1a_N-xYgzZx6KGNV4o7sP8rar8wvdE174yb5qeZRQ-bbMM8ArA0qe0vTh8x716J-aMejyT8TFfs4yAINn4Ot6816k16JHErOv7rCz2fK9zr-yocF6zBJN69L0zwlkYr1WXB-EE4rZWq9TWmZVX4-VfR-2I3nJQN2iS8EtfGa-ytx3E965g_ulCu_jNX79-6zbEd7ZJ81j5vZZqHdR6tc0TfovTRrW8_qjymapiTQyhzhf_6u3qXr1hCGAyj8OMVmzcA0XCIYgl_oZnzp_DA4sEdJMu1gxH7KjK1wHc9fgwMyxQ'})
-
-    participant_token = ({'Authorization': 'Bearer ' + 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlZXWTJZNnZjZjV4WU1JZWc4S0s0RyJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZXZlbnRvcy51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAxMWFjYzA0NDFmZDYwMDcwODI0YzBiIiwiYXVkIjoiRXZlbnRvcyIsImlhdCI6MTYxMjExMjE2MCwiZXhwIjoxNjEyMTE5MzYwLCJhenAiOiJ5RTFNWTJvUUxSYUJkUHJBbGF1MEMzd0t2bU1JOW05RCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnBhcnRpY2lwYW50IiwicG9zdDpwYXJ0aWNpcGFudCJdfQ.jG7YoeQDrBbYNH2vssAT54_9pWhv63ZORC_mb9qT0RSsP-SAWMzQFhPatb51Z_WWgfXL3xCjq97u6upcQ2N-7MbInsgHUybpYKHm5JUlwyzwqbJAa-xyS78wM6YWDT7xeTCQmCLXgt6YRw3rHg-7fU3C0WNAKqfGLtojPvZBy6TCuskIeTna9qshhmcZeYNxhTOEOUxCGdEMmMKH5K1eiVHnAAzqxTK8VvgMiZ4dS-ODIZkQfi3oZO9lTVb3suSXSDnsk6KYMSUTKt-jPd8W76mZvit_KsvNZToHtlk7ACqo922bzcyMKxHsWzSqpJxyr1CFpeBqZ4EwlogdxgBvSA'})
-
     def setUp(self):
         # Define test variables and initialize app
+        self.client = app.test_client
+        '''
         # self.app = app
         # self.client = self.app.test_client
-        self.client = app.test_client
         self.database_name = "eventos_test"
         self.database_domain = "localhost:5432"
-        self.database_path = "postgresql://{}/{}".format(
-            self.database_domain, self.database_name)
+            DATABASE_URL = "postgresql://{}/{}".format(
+        self.database_domain, self.database_name)
         # setup_db(self.app, self.database_path)
         # db_drop_and_create_all()
-
+        '''
         '''
         # binds the app to the current context
         with self.app.app_context():
@@ -82,7 +88,7 @@ class EventosTestCase(unittest.TestCase):
             "image_link": "https://i.imgur.com/0hQyd5L.gif"
         }
         res = self.client().post(
-            '/manager', json=data, headers=self.admin_token)
+            '/manager', json=data, headers=ADMIN_AUTH)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -97,7 +103,7 @@ class EventosTestCase(unittest.TestCase):
             "image_link": "https://i.imgur.com/0hQyd5L.gif"
         }
         res = self.client().post(
-            '/manager', json=data, headers=self.admin_token)
+            '/manager', json=data, headers=ADMIN_AUTH)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -109,7 +115,7 @@ class EventosTestCase(unittest.TestCase):
             "id": 2
         }
         res = self.client().delete(
-            '/manager', json=data, headers=self.admin_token)
+            '/manager', json=data, headers=ADMIN_AUTH)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -145,7 +151,7 @@ class EventosTestCase(unittest.TestCase):
             "image_link": "https://i.imgur.com/0hQyd5L.gif"
         }
         res = self.client().post(
-            '/event', json=data, headers=self.manager_token)
+            '/event', json=data, headers=MANAGER_AUTH)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -162,7 +168,7 @@ class EventosTestCase(unittest.TestCase):
             "image_link": "https://i.imgur.com/0hQyd5L.gif"
         }
         res = self.client().post(
-            '/event', json=data, headers=self.manager_token)
+            '/event', json=data, headers=MANAGER_AUTH)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -174,7 +180,7 @@ class EventosTestCase(unittest.TestCase):
             "id": 2
         }
         res = self.client().delete(
-            '/event', json=data, headers=self.manager_token)
+            '/event', json=data, headers=MANAGER_AUTH)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -187,7 +193,7 @@ class EventosTestCase(unittest.TestCase):
             "name": "event-updated"
         }
         res = self.client().patch(
-            '/event', json=data, headers=self.manager_token)
+            '/event', json=data, headers=MANAGER_AUTH)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -219,7 +225,7 @@ class EventosTestCase(unittest.TestCase):
             "phone": "0504567123"
         }
         res = self.client().post(
-            '/participant', json=data, headers=self.participant_token)
+            '/participant', json=data, headers=PARTICIPANT_AUTH)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -232,7 +238,7 @@ class EventosTestCase(unittest.TestCase):
             "phone": "0501122334"
         }
         res = self.client().post(
-            '/participant', json=data, headers=self.participant_token)
+            '/participant', json=data, headers=PARTICIPANT_AUTH)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -244,7 +250,7 @@ class EventosTestCase(unittest.TestCase):
             "id": 2
         }
         res = self.client().delete(
-            '/participant', json=data, headers=self.participant_token)
+            '/participant', json=data, headers=PARTICIPANT_AUTH)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
